@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+// The Account service definition
+service Reply {
+  // Sends a confirmation
+  rpc Mount (MountReq) returns (MountRep) {}
+}
+
+// Request message containing the Mount status
+message MountReq {
+  string ip = 1;
+  string path = 2;
+}
+
+// Response Message containing Mount status
+message MountRep {
+  string msg = 1;
+}

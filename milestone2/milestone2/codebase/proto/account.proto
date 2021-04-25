@@ -1,0 +1,233 @@
+// Copyright 2015 gRPC authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+// The Account service definition
+service Reply {
+  // Sends a confirmation
+  rpc Creation (CreationRequest) returns (CreationReply) {}
+  rpc Login (LoginRequest) returns (LoginReply) {}
+  rpc Delete (DeleteRequest) returns (DeleteReply) {}
+  rpc Update (UpdateRequest) returns (UpdateReply) {}
+  rpc MountFs (FilesystemRequest) returns (FilesystemReply) {}
+  rpc ls (ClientSysCallRequest) returns (ClientSysCallReply) {}
+  rpc opendir (opendirRequest) returns (opendirReply) {}
+  rpc getattr (getattrRequest) returns (getatrrReply) {}
+  rpc stat (statRequest) returns (statReply) {}
+  rpc mkdir (mkdirRequest) returns (mkdirReply) {}
+  rpc fullPath (ClientSysCallRequest) returns (ClientSysCallReply) {}
+  rpc access (ClientSysCallRequest) returns (ClientSysCallReply) {}
+  rpc chmod (ClientSysCallRequest) returns (ClientSysCallReply) {}
+  rpc chown (ClientSysCallRequest) returns (ClientSysCallReply) {}
+  rpc readdir (ClientSysCallRequest) returns (ClientSysCallReply) {}
+  rpc readlink (ClientSysCallRequest) returns (ClientSysCallReply) {}
+  rpc mknod (ClientSysCallRequest) returns (ClientSysCallReply) {}
+  rpc rmdir (ClientSysCallRequest) returns (ClientSysCallReply) {}
+  rpc statfs (ClientSysCallRequest) returns (ClientSysCallReply) {}
+  rpc unlink (unlinkRequest) returns (unlinkReply) {}
+  rpc symlink (ClientSysCallRequest) returns (ClientSysCallReply) {}
+  rpc rename (ClientSysCallRequest) returns (ClientSysCallReply) {}
+  rpc link (ClientSysCallRequest) returns (ClientSysCallReply) {}
+  rpc utimens (ClientSysCallRequest) returns (ClientSysCallReply) {}
+  rpc open (openRequest) returns (openReply) {}
+  rpc create (createRequest) returns (createReply) {}
+  rpc read (readRequest) returns (readReply) {}
+  rpc write (writeRequest) returns (writeReply) {}
+  rpc truncate (ClientSysCallRequest) returns (ClientSysCallReply) {}
+  rpc flush (ClientSysCallRequest) returns (ClientSysCallReply) {}
+  rpc release (ClientSysCallRequest) returns (ClientSysCallReply) {}
+  rpc fsync (ClientSysCallRequest) returns (ClientSysCallReply) {}
+}
+
+// All available client system call requests
+message ClientSysCallRequest {
+  string ls = 1;
+  string opendir = 2;
+  string getattr = 3;
+  string stat = 4;
+  string mkdir = 5;
+  string fullPath = 6;
+  string access = 7;
+  string chmod = 8;
+  string chown = 9;
+  string readdir = 10;
+  string readlink = 11;
+  string mknod = 12;
+  string rmdir = 13;
+  string statfs = 14;
+  string unlink = 15;
+  string symlink = 16;
+  string rename = 17;
+  string link = 18;
+  string utimens = 19;
+  string open = 20;
+  string create = 21;
+  string read = 22;
+  string write = 23;
+  string truncate = 24;
+  string flush = 25;
+  string release = 26;
+  string fsync = 27;
+}
+
+message opendirRequest {
+  string message = 1;
+}
+
+message opendirReply {
+  string message = 1;
+}
+
+message getattrRequest {
+  string path = 1;
+  string fh = 2;
+}
+
+message getatrrReply {
+  string st = 1;
+}
+
+message statRequest {
+  string message = 1;
+}
+
+message statReply {
+  string message = 1;
+}
+
+message openRequest {
+  string path = 1;
+  string flags = 2;
+}
+
+message openReply {
+  // string path = 1;
+  int reply = 1;
+}
+
+message createRequest {
+  string path = 1;
+  int mode = 2;
+  string fi = 3;
+}
+
+message createReply {
+  string path = 1;
+  int reply = 2;
+}
+
+message readRequest {
+  string path = 1;
+  int length = 2;
+  int offset = 3;
+  int fh = 4;
+}
+
+message readReply {
+  string reply = 1;
+}
+
+message writeRequest {
+  string path = 1;
+  int buf = 2;
+  int offset = 3;
+  int fh = 4;
+}
+
+message writeReply {
+  int reply = 1;
+}
+
+message unlinkRequest {
+  string path = 1;
+}
+
+message unlinkReply {
+  NoneType reply = 1;
+}
+
+message mkdirRequest {
+  string path = 1;
+  int mode = 2;
+}
+
+message mkdirReply {
+  NoneType reply = 1;
+}
+
+message ClientSysCallReply {
+  string message = 1;
+}
+
+// The request message containing the user's name.
+message FilesystemRequest {
+  string fsPath = 1;
+}
+
+// The response message containing the greetings
+message FilesystemReply {
+  string message = 1;
+}
+
+// Request message containing the 'new' account credentials
+message CreationRequest {
+  string name = 1;
+  string password = 2;
+}
+
+// Response Message containing the Account Creation status
+message CreationReply {
+  string message = 1;
+}
+
+// Request message containing login credentials
+message LoginRequest {
+  string name = 1;
+  string password = 2;
+  string message = 3;
+}
+
+// Response message containing the status of a Login
+message LoginReply {
+  string message = 1;
+  string token = 2;
+}
+
+// Request message containing Deletion credentials
+message DeleteRequest {
+  string name = 1;
+  string password = 2;
+  string authentication = 3;
+  string message = 4;
+}
+
+// Response message containing the status of a Login
+message DeleteReply {
+  string message = 1;
+}
+
+// Request message containing Deletion credentials
+message UpdateRequest {
+  string name = 1;
+  string password = 2;
+  string newPassword = 3;
+  string authentication = 4;
+  string message = 5;
+}
+
+// Response message containing the status of a Login
+message UpdateReply {
+  string message = 1;
+}
