@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+// The Account service definition
+service Reply {
+  // Sends a confirmation
+  rpc Creation (CreationRequest) returns (CreationReply) {}
+  rpc Login (LoginRequest) returns (LoginReply) {}
+  rpc Delete (DeleteRequest) returns (DeleteReply) {}
+  rpc Update (UpdateRequest) returns (UpdateReply) {}
+  rpc AdminUpdate (AdminUpdateRequest) returns (UpdateReply) {}
+  rpc CreationTolerance (CreationToleranceRequest) returns (CreationToleranceReply) {}
+}
+
+
+// Request message containing the 'new' account credentials
+message CreationRequest {
+  string name = 1;
+  string password = 2;
+  string admin = 3;
+}
+
+// Response Message containing the Account Creation status
+message CreationReply {
+  string message = 1;
+}
+
+// Request message containing login credentials
+message LoginRequest {
+  string name = 1;
+  string password = 2;
+  string message = 3;
+}
+
+// Response message containing the status of a Login
+message LoginReply {
+  string message = 1;
+  string token = 2;
+  string isAdmin = 3;
+}
+
+// Request message containing Deletion credentials
+message DeleteRequest {
+  string name = 1;
+  string password = 2;
+  string authentication = 3;
+  string message = 4;
+}
+
+// Response message containing the status of a Login
+message DeleteReply {
+  string message = 1;
+}
+
+// Request message containing Deletion credentials
+message UpdateRequest {
+  string name = 1;
+  string password = 2;
+  string newPassword = 3;
+  string authentication = 4;
+  string message = 5;
+}
+
+message AdminUpdateRequest {
+  string adminUser = 1;
+  string token = 2;
+  string name = 3;
+  string newName = 4;
+  string newPass = 5;
+  string message = 6;
+}
+
+// Response message containing the status of a Login
+message UpdateReply {
+  string message = 1;
+}
+
+message CreationToleranceRequest {
+  string user = 1;
+  string phash = 2;
+  string token = 3;
+  string expiry = 4;
+}
+
+// Response Message containing the Account Creation status
+message CreationToleranceReply {
+  string message = 1;
+}
